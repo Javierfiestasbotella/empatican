@@ -6,13 +6,20 @@ from tkinter import ttk, filedialog
 from models import Cliente, Perro, Sesion, Seminario, Pago  # Importar los modelos
 from tkinter import PhotoImage
 from tkinter import messagebox
+import os
+
 
 class ClientCardForm(tk.Toplevel):
-    def __init__(self, parent, cliente_id=None):
+    def __init__(self, parent,BASE_DIR, cliente_id=None):
         super().__init__(parent)
+
         self.title("SGE(Sistema de Gestión de Empatican)")
+        self.base_dir =  BASE_DIR  # Guardamos BASE_DIR como atributo
+
         self.geometry("1300x700")
-        self.iconbitmap("empatican/logemp.ico")  # Ruta a tu archivo .ico
+        icon_path = os.path.join(BASE_DIR,  "logemp.ico")
+        self.iconbitmap(icon_path)
+        #self.iconbitmap("empatican/logemp.ico")  # Ruta a tu archivo .ico
         self.configure(bg="#f0f0f0")  # Color de fondo neutro
 
         self.color_principal = "#FF4500"  # Naranja fuego

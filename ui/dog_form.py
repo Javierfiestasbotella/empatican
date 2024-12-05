@@ -6,12 +6,15 @@ import os
 from shutil import copyfile  # Para copiar la imagen seleccionada a la carpeta de imágenes
 
 class DogForm(tk.Toplevel):
-    def __init__(self, parent):
+    def __init__(self, parent,BASE_DIR):
         super().__init__(parent)
         self.title("SGE (Sistema de Gestión de Empatican)")
         self.geometry("400x500")
+        icon_path = os.path.join(BASE_DIR,  "logemp.ico")
+        self.iconbitmap(icon_path)
         self.configure(bg="#f0f0f0")
-        self.iconbitmap("empatican/logemp.ico")  # Ruta a tu archivo .ico
+        self.base_dir =  BASE_DIR  # Guardamos BASE_DIR como atributo
+        #self.iconbitmap("empatican/logemp.ico")  # Ruta a tu archivo .ico
 
         # Etiquetas y campos de entrada
         tk.Label(self, text="Name:").grid(row=0, column=0, padx=10, pady=10)

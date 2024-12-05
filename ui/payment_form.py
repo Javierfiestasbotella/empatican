@@ -2,14 +2,18 @@ import tkinter as tk
 from tkinter import messagebox
 from ui.style import style_button, style_label
 from models import Pago
+import os
 
 class PaymentForm(tk.Toplevel):
-    def __init__(self, parent):
+    def __init__(self, parent,BASE_DIR):
         super().__init__(parent)
         self.title("SGE(Sistema de Gestión de Empatican)")
+        self.base_dir =  BASE_DIR  # Guardamos BASE_DIR como atributo
         self.geometry("400x400")
+        icon_path = os.path.join(BASE_DIR,  "logemp.ico")
+        self.iconbitmap(icon_path)
         self.configure(bg="#f0f0f0")
-        self.iconbitmap("empatican/logemp.ico")  # Ruta a tu archivo .ico
+        #self.iconbitmap("empatican/logemp.ico")  # Ruta a tu archivo .ico
 
         # Etiquetas y campos de entrada
         tk.Label(self, text="Client ID:").grid(row=0, column=0, padx=10, pady=10)

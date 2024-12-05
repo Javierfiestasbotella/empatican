@@ -7,16 +7,27 @@ from ui.seminar_form import SeminarForm
 from ui.payment_form import PaymentForm
 from ui.client_card_form import ClientCardForm
 from ui.style import style_button
+import os
+
+
 
 class MainWindow(tk.Tk):
-    def __init__(self):
+    def __init__(self,BASE_DIR):
         super().__init__()
+        self.base_dir =  BASE_DIR  # Guardamos BASE_DIR como atributo
+
         self.title("SGE(Sistema de Gestión de Empatican)")
         self.geometry("800x600")
-        self.iconbitmap("Gestion-App/empatican/logemp.ico")  # Ruta a tu archivo .ico
+        # Ruta para logemp.ico
+        icon_path = os.path.join(BASE_DIR,  "logemp.ico")
+        self.iconbitmap(icon_path)
+        #self.iconbitmap("Gestion-App/empatican/logemp.ico")  # Ruta a tu archivo .ico
 
         # Cargar imagen de fondo
-        self.background_image = PhotoImage(file="Gestion-App/empatican/fondo4.png")
+        # Ruta para una imagen
+        fondo_path = os.path.join(BASE_DIR,  "fondo4.png")
+        self.background_image = PhotoImage(file=fondo_path)
+        #self.background_image = PhotoImage(file="empatican/fondo4.png")
         background_label = tk.Label(self, image=self.background_image)
         background_label.place(relwidth=1, relheight=1)  # Expandir la imagen a toda la ventana
         self.configure(bg="#f0f0f0")
@@ -48,29 +59,34 @@ class MainWindow(tk.Tk):
         client_card_button = tk.Button(self, text="Ver Ficha del Cliente", command=self.open_client_card_form, bg=button_color, fg="#ffffff", font=("Arial", 12, "bold"), relief="raised", bd=5)
         client_card_button.pack(pady=8, padx=20, anchor="center")
 
-    def open_client_form(self):
-        form = ClientForm(self)
+    def open_client_card_form(self):
+        form = ClientCardForm(self, self.base_dir)  # Pasar self.base_dir
         form.grab_set()
 
+
+    def open_client_form(self):
+        print("Abriendo formulario de clientes")
+        form = ClientForm(self, self.base_dir)
+        form.grab_set()
+
+
     def open_dog_form(self):
-        form = DogForm(self)
+        form = DogForm(self, self.base_dir)
         form.grab_set()
 
     def open_session_form(self):
-        form = SessionForm(self)
+        form = SessionForm(self, self.base_dir)
         form.grab_set()
 
     def open_seminar_form(self):
-        form = SeminarForm(self)
+        form = SeminarForm(self, self.base_dir)
         form.grab_set()
 
     def open_payment_form(self):
-        form = PaymentForm(self)
+        form = PaymentForm(self, self.base_dir)
         form.grab_set()
 
-    def open_client_card_form(self):
-        form = ClientCardForm(self)
-        form.grab_set()
+    
 
 if __name__ == "__main__":
     app = MainWindow()

@@ -2,13 +2,18 @@ import tkinter as tk
 from tkinter import messagebox
 from ui.style import style_button, style_label
 from models import Cliente
+import os
 
 class ClientForm(tk.Toplevel):
-    def __init__(self, parent):
+    def __init__(self, parent,BASE_DIR):
         super().__init__(parent)
         self.title("SGE(Sistema de Gestión de Empatican)")
+
         self.geometry("400x300")
-        self.iconbitmap("Gestion-App/empatican/logemp.ico")  # Ruta a tu archivo .ico
+        icon_path = os.path.join(BASE_DIR,  "logemp.ico")
+        self.iconbitmap(icon_path)
+
+        #self.iconbitmap("empatican/logemp.ico")  # Ruta a tu archivo .ico
 
         self.configure(bg="#f0f0f0")
 
